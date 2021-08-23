@@ -1,0 +1,9 @@
+{
+  "service": {
+    "name": "webserver",
+    "tags": [
+      "php"
+    ],
+    "port": 80
+  }
+}

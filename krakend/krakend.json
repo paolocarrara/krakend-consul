@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "name": "gateway",
+  "port": 8080,
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "read_timeout": "10s",
+  "write_timeout": "10s",
+  "idle_timeout": "10s",
+  "read_header_timeout": "10s",
+  "endpoints": [
+    {
+      "endpoint": "/consul",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "url_pattern": "/",
+          "sd": "dns",
+          "host": [
+            "webserver.service.dc1.consul"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    }
+  ]
+}

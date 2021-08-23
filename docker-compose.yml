@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+  krakend:
+    image: devopsfaith/krakend
+    container_name: krakend
+    restart: unless-stopped
+    ports:
+      - "8181:8080"
+    volumes:
+      - ./krakend:/etc/krakend
+    networks:
+      - app
+  master:
+    image: consul
+    container_name: master
+    restart: unless-stopped
+    ports:
+      - "8060:80"
+      - "8500:8500"
+    command: "agent -bootstrap-expect=1 -dns-port=53 -recursor=8.8.8.8 -server -ui -client 0.0.0.0"
+    networks:
+      - app
+  s1:
+    image: base-agent
+    container_name: s1
+    restart: unless-stopped
+    ports:
+      - "8061:80"
+    networks:
+      - app
+    depends_on:
+      - master
+  s2:
+    image: base-agent
+    container_name: s2
+    restart: unless-stopped
+    ports:
+      - "8062:80"
+    networks:
+      - app
+    depends_on:
+      - master
+
+networks:
+  app:
+    driver: bridge

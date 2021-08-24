@@ -1,0 +1,9 @@
+{
+  "service": {
+    "name": "krakend",
+    "tags": [
+      "krakend"
+    ],
+    "port": 80
+  }
+}

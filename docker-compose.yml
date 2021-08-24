@@ -8,6 +8,8 @@ services:
       - "8181:8080"
     volumes:
       - ./krakend:/etc/krakend
+    dns:
+      - master
     networks:
       - app
   master:
@@ -36,6 +38,16 @@ services:
     restart: unless-stopped
     ports:
       - "8062:80"
+    networks:
+      - app
+    depends_on:
+      - master
+  s3:
+    image: nginx:1.21.1
+    container_name: s3
+    restart: unless-stopped
+    ports:
+      - "8063:80"
     networks:
       - app
     depends_on:

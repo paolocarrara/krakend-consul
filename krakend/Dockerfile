@@ -1,4 +1,4 @@
-FROM nginx:1.21.1
+FROM devopsfaith/krakend
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install consul
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /tmp/consul
-COPY ./webserver/webserver.json /etc/consul.d/webserver.json
+COPY ./krakend-service.json /etc/consul.d/krakend-service.json
 
 WORKDIR /etc/consul.d
 

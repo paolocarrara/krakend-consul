@@ -24,6 +24,21 @@
           "disable_host_sanitize": false
         }
       ]
+    },
+    {
+      "endpoint": "/s3/consul",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "url_pattern": "/",
+          "host": [
+            "http://s3:80"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
     }
   ]
 }
